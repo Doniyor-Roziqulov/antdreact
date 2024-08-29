@@ -1,22 +1,14 @@
 import Empty from "@/components/empty/Empty";
 import Products from "@/components/Products";
-import { useStateValue } from "@/context";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Wishlit = () => {
-    const [data, dispatch] = useStateValue();
+    const data = useSelector((state) => state.wishlist);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    return (
-        <div>
-            {data.wishlist.length ? (
-                <Products data={data.wishlist} />
-            ) : (
-                <Empty />
-            )}
-        </div>
-    );
+    return <div>{data.length ? <Products data={data} /> : <Empty />}</div>;
 };
 
 export default Wishlit;
